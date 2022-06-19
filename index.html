@@ -5,37 +5,132 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
+    <style lang="css">
+      *{
+        box-sizing: border-box;
+      }
+      body{
+        background: rgb(255,157,200);
+        background: linear-gradient(90deg, rgba(255,157,200,1) 0%, rgba(255,207,101,1) 100%);
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      #app{
+        margin: 10vh auto;
+        padding: 20px;
+        width: 60vh;
+        height: 70vh;
+        background-color: white;
+        border-radius: 5%;
+      }
+      #todo-title{
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 800;
+        color: #8d583d;
+        font-size: 1.5rem;
+        margin: 16px 0;
+        text-align: center;
+      }
+      #todo-subtitle{
+        display: block;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #6c3a22;
+        font-size: 1rem;
+      }
+      #todo-input{
+        min-height: 1.5rem;
+        min-width: 100%;
+        display: block;
+        margin: 10px 0;
+        padding: 5px;
+        border-radius: 8px;
+        border: #ffd67d solid .5px;
+        font-size: 1rem;
+      }
+      #todo-submit{
+        display: block;
+        background: linear-gradient(90deg, rgba(255,157,200,1) 0%, rgba(255,207,101,1) 100%);
+        border: 0;
+        border-radius: 8px;
+        height: fit-content;
+        min-width: 100%;
+        margin: 8px 0;
+        padding: 8px 0;
+        color: #6c3a22;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 1px;
+        font-size: 1rem;
+      }
+      #todo-output li{
+        color: #6c3a22;
+        font-size: 1rem;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
       <!-- TODO: Buatlah sebuah header dengan id todo-title -->
+      <header id="todo-title">
+        TO DO LIST APP
+      </header>
       <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+      <subtitle id="todo-subtitle">
+        Today I need to do
+      </subtitle>
 
       <!-- Section: input -->
       <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
+      <input type="text" name="" id="todo-input">
       <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
+      <button id="todo-submit">Submit</button>
 
       <!-- Section output -->
       <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+        <ul id="todo-output">
+
+        </ul>
     </div>
 
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      let button = document.getElementById('todo-submit')
+      let input = document.getElementById('todo-input');
+      let output = document.getElementById('todo-output');
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) {
+        let li = document.createElement('li');
+
+        li.innerText = toDoItem;
+        output.appendChild(li);
+
+        input.value = "";
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
+      button.addEventListener('click', function(){
+          fnClickHandler(input.value);
+      });
+
       
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      input.addEventListener('keypress', function(){
+        if(event.keyCode == 13 || event.which == 13 || event.key ==='Enter'){
+          fnClickHandler(input.value);
+        }
+      });
     </script>
   </body>
 </html>
